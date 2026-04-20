@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Segla Grill og Pub — Smak av Senja | Fjordgård</title>
+<meta name="description" content="Segla Grill og Pub i Fjordgård på Senja serverer ferske lokale råvarer, legendariske fish & chips og Segla-burger med utsikt mot Ørnfjorden og det ikoniske Segla-fjellet." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Manrope:wght@300..800&display=swap" rel="stylesheet">
+
+<style>
+  /* ═══════════════════════════════════════════════════════════════════
+     HVORDAN BYTTE UT BILDER OG LOGO — LES DETTE FØRST!
+     ═══════════════════════════════════════════════════════════════════
+
+     ⭐ ANBEFALT:  Bruk egne bilder av Segla-fjellet tatt fra Fjordgård
+        for et ENDA mer personlig uttrykk. De to viktigste plassene er:
+
+     1️⃣  HOVEDBILDE (Hero — det store bildet øverst):
+         Legg bildefilen din (f.eks. "segla-hero.jpg") i samme mappe
+         som HTML-filen, og endre --hero-image nedenfor til:
+           --hero-image: url('segla-hero.jpg');
+
+     2️⃣  BAKGRUNN I FJELLSEKSJONEN (kalt "639 meter over havet"):
+         Samme framgangsmåte — endre --hiking-image nedenfor:
+           --hiking-image: url('segla-fra-hesten.jpg');
+
+     3️⃣  LOGOEN I NAVIGASJONSLINJEN:
+         Ligger allerede ferdig. Fungerer så lenge de to filene
+           • segla-logo-dark.png
+           • segla-logo-light.png
+         ligger i samme mappe som HTML-filen.
+
+     4️⃣  BILDER I MENY, GALLERI OG STORY:
+         Åpne HTML-filen i et redigeringsprogram og søk etter "src="
+         — hvert bilde har en kort kommentar som forklarer hva det er.
+
+     💡 Bildeformater: .jpg gir best kvalitet/størrelse. Hold
+        hovedbildet under 500 KB for rask lastning.
+
+     ═══════════════════════════════════════════════════════════════════ */
+
+  :root{
+    --midnight: #0b1420;
+    --midnight-2: #121d2c;
+    --deep-sea: #1a2a3f;
+    --fjord: #2b4560;
+    --mist: #e8e4da;
+    --bone: #f4efe4;
+    --paper: #faf6ec;
+    --ember: #c2602a;
+    --ember-soft: #e08652;
+    --gold: #d6a74a;
+    --moss: #5a6b46;
+    --ink: #0a0f17;
+    --line: rgba(11,20,32,.14);
+    --line-soft: rgba(11,20,32,.08);
+    --line-light: rgba(244,239,228,.18);
+
+    /* === BILDEADRESSER — BYTT UT DISSE MED EGNE BILDER AV SEGLA === */
+    /* Hovedbilde øverst på siden (Segla-fjellet sett fra fjorden): */
+    --hero-image: url('https://skagisenja.no/images/opplevelser/Segla.jpg');
+    /* Bakgrunn bak fjelldata-seksjonen (Segla sett fra Hesten): */
+    --hiking-image: url('https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=2400&q=80');
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Manrope', system-ui, sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    font-size:16px;
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{display:block; max-width:100%; height:auto}
+  a{color:inherit; text-decoration:none}
+  h1,h2,h3,h4{font-family:'Fraunces', serif; font-weight:400; letter-spacing:-.02em; line-height:1.1}
+  .serif{font-family:'Fraunces', serif}
+  .italic{font-style:italic; font-variation-settings:"SOFT" 100}
+
+  /* ---------- UTILITIES ---------- */
+  .container{max-width:1280px; margin:0 auto; padding:0 28px}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-size:12px; letter-spacing:.22em; text-transform:uppercase;
+    font-weight:600; color:var(--ember);
+  }
+  .eyebrow::before{content:''; width:28px; height:1px; background:currentColor}
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:16px 28px; border-radius:999px; font-weight:600;
+    font-size:14px; letter-spacing:.04em; text-transform:uppercase;
+    transition:all .3s ease; border:1px solid transparent; cursor:pointer;
+  }
+  .btn-primary{background:var(--ink); color:var(--paper)}
+  .btn-primary:hover{background:var(--ember); transform:translateY(-2px)}
+  .btn-ghost{border-color:var(--line); color:var(--ink)}
+  .btn-ghost:hover{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+  .btn-light{background:var(--paper); color:var(--ink)}
+  .btn-light:hover{background:var(--ember); color:var(--paper)}
+  .btn-outline-light{border:1px solid var(--line-light); color:var(--paper)}
+  .btn-outline-light:hover{background:var(--paper); color:var(--ink); border-color:var(--paper)}
+
+  .icon{width:18px; height:18px; stroke-width:1.75; flex-shrink:0}
+  .icon-lg{width:28px; height:28px}
+  .icon-xl{width:40px; height:40px; stroke-width:1.25}
+
+  /* ---------- NAV ---------- */
+  nav.site{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    padding:22px 0;
+    transition:all .4s ease;
+    background:transparent;
+  }
+  nav.site.scrolled{
+    background:rgba(250,246,236,.92);
+    backdrop-filter:blur(14px);
+    padding:14px 0;
+    box-shadow:0 1px 0 var(--line-soft);
+  }
+  nav.site .wrap{display:flex; align-items:center; justify-content:space-between; color:var(--paper)}
+  nav.site.scrolled .wrap{color:var(--ink)}
+
+  /* Logo: two images that cross-fade based on scroll state */
+  .logo{
+    display:flex; align-items:center; gap:14px;
+    text-decoration:none;
+  }
+  .logo-img{
+    position:relative;
+    width:58px; height:58px;
+    flex-shrink:0;
+    transition:width .3s ease, height .3s ease;
+  }
+  .logo-img img{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:contain;
+    transition:opacity .4s ease;
+  }
+  .logo-img .logo-light{opacity:1}
+  .logo-img .logo-dark{opacity:0}
+  nav.site.scrolled .logo-img{width:50px; height:50px}
+  nav.site.scrolled .logo-img .logo-light{opacity:0}
+  nav.site.scrolled .logo-img .logo-dark{opacity:1}
+  .logo-text{
+    font-family:'Fraunces', serif;
+    font-size:17px;
+    letter-spacing:.02em;
+    line-height:1.15;
+    display:flex; flex-direction:column;
+  }
+  .logo-text .small{
+    font-size:10px;
+    letter-spacing:.26em;
+    text-transform:uppercase;
+    font-family:'Manrope', sans-serif;
+    opacity:.65;
+    font-weight:600;
+    margin-top:2px;
+  }
+  @media (max-width: 600px){
+    .logo-text{display:none}
+    .logo-img{width:46px; height:46px}
+  }
+  nav.site ul{display:flex; gap:36px; list-style:none; font-size:13px; letter-spacing:.08em; text-transform:uppercase; font-weight:500}
+  nav.site ul a{position:relative; padding:6px 0; transition:opacity .2s}
+  nav.site ul a:hover{opacity:.7}
+  nav.site .nav-cta{display:flex; gap:12px; align-items:center}
+  .phone-link{display:flex; align-items:center; gap:8px; font-weight:600; font-size:14px}
+  .mobile-toggle{display:none; background:none; border:none; color:inherit; cursor:pointer}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; min-height:100vh;
+    display:flex; flex-direction:column; justify-content:flex-end;
+    color:var(--paper); overflow:hidden;
+    padding:140px 0 60px;
+  }
+  .hero-bg{
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(180deg, rgba(11,20,32,.35) 0%, rgba(11,20,32,.25) 40%, rgba(11,20,32,.9) 100%),
+      var(--hero-image);
+    background-size:cover; background-position:center;
+    transform:scale(1.05);
+    animation:slowZoom 20s ease-out forwards;
+  }
+  .hero-bg-fallback{
+    position:absolute; inset:0; z-index:-1;
+    background:linear-gradient(180deg, #1a2a3f 0%, #0b1420 100%);
+  }
+  @keyframes slowZoom{to{transform:scale(1)}}
+  .hero-content{position:relative; z-index:2}
+  .hero-grid{display:grid; grid-template-columns:1.2fr 1fr; gap:60px; align-items:end}
+  .hero-title{
+    font-size:clamp(56px, 9vw, 132px);
+    line-height:.92; letter-spacing:-.035em;
+    font-weight:300;
+  }
+  .hero-title em{font-style:italic; color:var(--gold); font-variation-settings:"SOFT" 100}
+  .hero-eyebrow{color:var(--ember-soft); margin-bottom:28px}
+  .hero-eyebrow::before{background:var(--ember-soft)}
+  .hero-sub{
+    font-size:17px; line-height:1.6; opacity:.92;
+    max-width:460px; margin-bottom:32px;
+  }
+  .hero-actions{display:flex; gap:14px; flex-wrap:wrap}
+  .hero-meta{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:24px;
+    margin-top:80px; padding-top:32px; border-top:1px solid var(--line-light);
+  }
+  .hero-meta-item{display:flex; flex-direction:column; gap:6px}
+  .hero-meta-label{font-size:11px; letter-spacing:.2em; text-transform:uppercase; opacity:.6}
+  .hero-meta-value{font-family:'Fraunces', serif; font-size:20px}
+
+  .hero-marquee{
+    position:absolute; bottom:0; left:0; right:0;
+    padding:14px 0; border-top:1px solid var(--line-light);
+    overflow:hidden; z-index:2;
+    font-size:12px; letter-spacing:.3em; text-transform:uppercase;
+  }
+  .marquee-track{display:flex; gap:60px; white-space:nowrap; animation:marquee 40s linear infinite}
+  .marquee-track span{display:inline-flex; align-items:center; gap:60px; opacity:.8}
+  .marquee-track span::after{content:'✦'; margin-left:60px; color:var(--gold)}
+  @keyframes marquee{to{transform:translateX(-50%)}}
+
+  /* ---------- SECTION BASE ---------- */
+  section{padding:120px 0; position:relative}
+  .section-head{
+    display:grid; grid-template-columns:1fr 1.5fr; gap:80px;
+    align-items:end; margin-bottom:72px;
+  }
+  .section-title{
+    font-size:clamp(40px, 5.5vw, 72px);
+    font-weight:300; letter-spacing:-.03em;
+  }
+  .section-title em{font-style:italic; color:var(--ember); font-variation-settings:"SOFT" 100}
+  .section-lede{font-size:18px; line-height:1.6; color:rgba(10,15,23,.72); max-width:520px}
+
+  /* ---------- STORY ---------- */
+  .story{background:var(--paper)}
+  .story-grid{display:grid; grid-template-columns:1fr 1fr; gap:100px; align-items:center}
+  .story-media{position:relative}
+  .story-media .image-main{
+    border-radius:4px; overflow:hidden; aspect-ratio:4/5;
+    background:linear-gradient(135deg, #2b4560, #1a2a3f);
+  }
+  .story-media .image-main img{width:100%; height:100%; object-fit:cover}
+  .story-media .image-float{
+    position:absolute; bottom:-60px; right:-40px;
+    width:55%; aspect-ratio:4/3; overflow:hidden; border-radius:4px;
+    box-shadow:0 30px 60px rgba(11,20,32,.25);
+    background:linear-gradient(135deg, #5a6b46, #2b4560);
+  }
+  .story-media .image-float img{width:100%; height:100%; object-fit:cover}
+  .story-media .badge{
+    position:absolute; top:24px; left:24px; z-index:2;
+    background:var(--paper); color:var(--ink);
+    padding:10px 16px; border-radius:999px;
+    font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+    font-weight:600;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .story-text h2{font-size:clamp(36px, 4.5vw, 60px); margin-bottom:24px}
+  .story-text p{margin-bottom:20px; font-size:17px; color:rgba(10,15,23,.78)}
+  .story-text p.lede{font-family:'Fraunces', serif; font-size:22px; color:var(--ink); line-height:1.4; font-style:italic}
+  .stats-row{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:24px;
+    margin-top:40px; padding-top:40px; border-top:1px solid var(--line);
+  }
+  .stat .num{font-family:'Fraunces', serif; font-size:44px; line-height:1; color:var(--ember)}
+  .stat .label{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:rgba(10,15,23,.6); margin-top:8px}
+
+  /* ---------- FEATURES ---------- */
+  .features{background:var(--midnight); color:var(--paper); overflow:hidden}
+  .features .eyebrow{color:var(--ember-soft)}
+  .features .eyebrow::before{background:var(--ember-soft)}
+  .features .section-title{color:var(--paper)}
+  .features .section-lede{color:rgba(244,239,228,.7)}
+  .features-grid{
+    display:grid; grid-template-columns:repeat(4, 1fr);
+    border-top:1px solid var(--line-light); border-left:1px solid var(--line-light);
+  }
+  .feature{
+    padding:48px 32px; border-right:1px solid var(--line-light); border-bottom:1px solid var(--line-light);
+    transition:background .3s ease;
+  }
+  .feature:hover{background:rgba(194,96,42,.08)}
+  .feature .icon-xl{color:var(--ember-soft); margin-bottom:28px}
+  .feature h3{font-size:24px; margin-bottom:12px}
+  .feature p{color:rgba(244,239,228,.65); font-size:15px; line-height:1.6}
+
+  /* ---------- MENU ---------- */
+  .menu{background:var(--bone)}
+  .menu-tabs{
+    display:flex; gap:8px; flex-wrap:wrap;
+    justify-content:center;
+    margin-bottom:56px;
+  }
+  .menu-tab{
+    padding:10px 22px; border-radius:999px; border:1px solid var(--line);
+    font-size:13px; letter-spacing:.08em; text-transform:uppercase;
+    background:transparent; color:var(--ink); cursor:pointer;
+    transition:all .25s;
+    font-weight:600;
+  }
+  .menu-tab.active, .menu-tab:hover{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+  .menu-panel{display:none}
+  .menu-panel.active{display:block; animation:fadeUp .5s ease}
+  @keyframes fadeUp{from{opacity:0; transform:translateY(12px)} to{opacity:1; transform:none}}
+
+  .menu-grid{display:grid; grid-template-columns:repeat(2, 1fr); gap:0; border-top:1px solid var(--line)}
+  .menu-item{
+    display:grid; grid-template-columns:110px 1fr auto; gap:24px;
+    padding:28px 32px; align-items:start;
+    border-bottom:1px solid var(--line);
+    transition:background .25s ease;
+  }
+  .menu-item:nth-child(odd){border-right:1px solid var(--line)}
+  .menu-item:hover{background:var(--paper)}
+  .menu-item-img{
+    width:110px; height:110px; border-radius:4px; overflow:hidden;
+    background:linear-gradient(135deg, var(--fjord), var(--deep-sea));
+    flex-shrink:0;
+  }
+  .menu-item-img img{width:100%; height:100%; object-fit:cover}
+  .menu-item-body h4{font-size:22px; margin-bottom:6px}
+  .menu-item-body p{font-size:14px; color:rgba(10,15,23,.65); line-height:1.5}
+  .menu-item-tag{
+    display:inline-block; font-size:10px; letter-spacing:.16em; text-transform:uppercase;
+    padding:3px 8px; border-radius:3px; margin-top:8px;
+    background:var(--ember); color:var(--paper); font-weight:700;
+  }
+  .menu-item-tag.local{background:var(--moss)}
+  .menu-item-tag.new{background:var(--ink)}
+  .menu-item-price{
+    font-family:'Fraunces', serif; font-size:22px; color:var(--ember);
+    white-space:nowrap;
+  }
+
+  /* ---------- HIKING SECTION ---------- */
+  .hiking{
+    position:relative; color:var(--paper); overflow:hidden;
+    padding:160px 0;
+  }
+  .hiking-bg{
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(180deg, rgba(11,20,32,.5) 0%, rgba(11,20,32,.7) 100%),
+      var(--hiking-image);
+    background-size:cover; background-position:center;
+    background-color:#0b1420;
+  }
+  .hiking-content{position:relative; z-index:2}
+  .hiking-grid{display:grid; grid-template-columns:1.2fr 1fr; gap:80px; align-items:center}
+  .hiking h2{font-size:clamp(44px, 6vw, 84px); margin-bottom:24px; color:var(--paper)}
+  .hiking h2 em{font-style:italic; color:var(--gold); font-variation-settings:"SOFT" 100}
+  .hiking p{font-size:18px; line-height:1.6; color:rgba(244,239,228,.86); margin-bottom:20px; max-width:540px}
+  .hiking-facts{
+    display:grid; grid-template-columns:repeat(2, 1fr);
+    gap:0; border-top:1px solid var(--line-light);
+  }
+  .fact{
+    padding:28px 0;
+    border-bottom:1px solid var(--line-light);
+  }
+  .fact:nth-child(odd){padding-right:24px; border-right:1px solid var(--line-light)}
+  .fact:nth-child(even){padding-left:24px}
+  .fact-label{font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(244,239,228,.55); margin-bottom:8px}
+  .fact-value{font-family:'Fraunces', serif; font-size:34px; color:var(--paper); line-height:1.1}
+  .fact-value em{color:var(--ember-soft); font-style:italic}
+  .fact-note{font-size:13px; color:rgba(244,239,228,.6); margin-top:4px}
+
+  /* ---------- GALLERY ---------- */
+  .gallery{background:var(--paper)}
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(12, 1fr);
+    grid-auto-rows:120px;
+    gap:12px;
+  }
+  .gallery-item{
+    overflow:hidden; border-radius:4px;
+    background:linear-gradient(135deg, var(--fjord), var(--midnight));
+    position:relative;
+    transition:transform .4s ease;
+  }
+  .gallery-item:hover{transform:scale(.98)}
+  .gallery-item img{width:100%; height:100%; object-fit:cover; transition:transform .6s ease}
+  .gallery-item:hover img{transform:scale(1.05)}
+  .gallery-item.g1{grid-column:span 5; grid-row:span 3}
+  .gallery-item.g2{grid-column:span 4; grid-row:span 2}
+  .gallery-item.g3{grid-column:span 3; grid-row:span 2}
+  .gallery-item.g4{grid-column:span 4; grid-row:span 2}
+  .gallery-item.g5{grid-column:span 3; grid-row:span 2}
+  .gallery-item.g6{grid-column:span 5; grid-row:span 3}
+  .gallery-item.g7{grid-column:span 4; grid-row:span 3}
+  .gallery-item.g8{grid-column:span 3; grid-row:span 3}
+
+  /* ---------- REVIEWS ---------- */
+  .reviews{background:var(--midnight-2); color:var(--paper)}
+  .reviews .section-title{color:var(--paper)}
+  .reviews .section-lede{color:rgba(244,239,228,.7)}
+  .reviews-head{display:flex; justify-content:space-between; align-items:end; margin-bottom:64px; gap:60px; flex-wrap:wrap}
+  .reviews-score{
+    display:flex; align-items:center; gap:20px;
+    padding:20px 28px; border:1px solid var(--line-light); border-radius:12px;
+  }
+  .reviews-score .big{font-family:'Fraunces', serif; font-size:54px; line-height:1; color:var(--gold)}
+  .reviews-score .meta{font-size:13px; color:rgba(244,239,228,.7); line-height:1.5}
+  .stars{display:flex; gap:2px; color:var(--gold); margin-bottom:6px}
+  .reviews-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:24px}
+  .review-card{
+    padding:36px 32px; border:1px solid var(--line-light); border-radius:8px;
+    background:rgba(244,239,228,.02);
+    display:flex; flex-direction:column; gap:20px;
+    transition:all .3s ease;
+  }
+  .review-card:hover{background:rgba(244,239,228,.04); transform:translateY(-4px)}
+  .review-card .quote-mark{color:var(--ember); font-family:'Fraunces', serif; font-size:56px; line-height:.5; font-style:italic}
+  .review-text{font-family:'Fraunces', serif; font-size:20px; line-height:1.5; color:rgba(244,239,228,.95); font-style:italic; font-variation-settings:"SOFT" 100}
+  .review-author{
+    display:flex; align-items:center; gap:14px;
+    padding-top:20px; border-top:1px solid var(--line-light);
+    margin-top:auto;
+  }
+  .review-avatar{
+    width:44px; height:44px; border-radius:50%;
+    background:linear-gradient(135deg, var(--ember), var(--gold));
+    display:grid; place-items:center; color:var(--ink); font-weight:700;
+    font-family:'Fraunces', serif; font-size:18px;
+  }
+  .review-name{font-weight:600; font-size:15px}
+  .review-meta{font-size:12px; color:rgba(244,239,228,.55)}
+
+  /* ---------- VISIT / CONTACT ---------- */
+  .visit{background:var(--paper)}
+  .visit-grid{display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start}
+  .hours-card{
+    padding:48px; border:1px solid var(--line); border-radius:8px;
+    background:var(--bone);
+  }
+  .hours-card h3{font-size:32px; margin-bottom:24px}
+  .hours-list{list-style:none}
+  .hours-list li{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding:14px 0; border-bottom:1px dashed var(--line);
+    font-size:15px;
+  }
+  .hours-list li:last-child{border:none}
+  .hours-list .day{font-weight:600; letter-spacing:.02em}
+  .hours-list .time{font-family:'Fraunces', serif; color:var(--ember); font-size:18px}
+  .hours-list .closed{color:rgba(10,15,23,.4); font-style:italic}
+  .hours-note{
+    margin-top:24px; padding:16px; border-radius:6px;
+    background:rgba(194,96,42,.08); border-left:3px solid var(--ember);
+    font-size:14px; color:rgba(10,15,23,.78);
+    display:flex; gap:12px; align-items:flex-start;
+  }
+  .hours-note .icon{color:var(--ember); margin-top:2px}
+
+  .contact-blocks{display:flex; flex-direction:column; gap:24px}
+  .contact-block{
+    display:flex; gap:20px; align-items:flex-start;
+    padding:24px; border:1px solid var(--line); border-radius:8px;
+    transition:all .25s ease; background:var(--paper);
+  }
+  .contact-block:hover{border-color:var(--ember); background:var(--bone); transform:translateX(4px)}
+  .contact-icon{
+    width:48px; height:48px; border-radius:50%;
+    background:var(--ink); color:var(--paper);
+    display:grid; place-items:center; flex-shrink:0;
+  }
+  .contact-block h4{font-family:'Manrope', sans-serif; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:rgba(10,15,23,.55); margin-bottom:6px; font-weight:700}
+  .contact-block .val{font-family:'Fraunces', serif; font-size:22px; color:var(--ink); line-height:1.3}
+  .contact-block .sub{font-size:14px; color:rgba(10,15,23,.6); margin-top:4px}
+
+  /* ---------- CTA BAND ---------- */
+  .cta-band{
+    background:var(--ember);
+    color:var(--paper);
+    padding:80px 0;
+    position:relative; overflow:hidden;
+  }
+  .cta-band::before{
+    content:''; position:absolute; inset:0;
+    background:
+      radial-gradient(circle at 20% 50%, rgba(244,239,228,.15), transparent 50%),
+      radial-gradient(circle at 80% 50%, rgba(11,20,32,.15), transparent 50%);
+  }
+  .cta-inner{
+    position:relative; z-index:2;
+    display:grid; grid-template-columns:1fr auto; gap:40px; align-items:center;
+  }
+  .cta-band h2{font-size:clamp(32px, 4.5vw, 54px); color:var(--paper); max-width:720px}
+  .cta-band h2 em{font-style:italic}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink); color:var(--paper); padding:100px 0 40px}
+  .footer-grid{
+    display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:60px;
+    margin-bottom:60px;
+  }
+  .footer-brand .logo{font-size:32px; margin-bottom:20px}
+  .footer-brand p{color:rgba(244,239,228,.65); font-size:15px; line-height:1.6; max-width:340px; margin-bottom:24px}
+  .socials{display:flex; gap:10px}
+  .socials a{
+    width:44px; height:44px; border:1px solid var(--line-light); border-radius:50%;
+    display:grid; place-items:center;
+    transition:all .25s;
+  }
+  .socials a:hover{background:var(--ember); border-color:var(--ember); transform:translateY(-2px)}
+  .footer-col h4{
+    font-family:'Manrope', sans-serif; font-size:12px; font-weight:700;
+    letter-spacing:.2em; text-transform:uppercase;
+    color:var(--ember-soft); margin-bottom:22px;
+  }
+  .footer-col ul{list-style:none}
+  .footer-col li{margin-bottom:12px}
+  .footer-col a{color:rgba(244,239,228,.75); font-size:15px; transition:color .2s}
+  .footer-col a:hover{color:var(--paper)}
+  .footer-col .item{display:flex; gap:10px; align-items:flex-start; font-size:15px; color:rgba(244,239,228,.75); margin-bottom:12px}
+  .footer-col .item .icon{color:var(--ember-soft); margin-top:3px; flex-shrink:0}
+  .footer-bottom{
+    padding-top:32px; border-top:1px solid var(--line-light);
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:16px;
+    font-size:13px; color:rgba(244,239,228,.55);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 960px){
+    nav.site ul{display:none}
+    .mobile-toggle{display:block}
+    .hero-grid, .story-grid, .hiking-grid, .visit-grid, .cta-inner{grid-template-columns:1fr; gap:50px}
+    .section-head{grid-template-columns:1fr; gap:24px}
+    .features-grid{grid-template-columns:repeat(2, 1fr)}
+    .reviews-grid{grid-template-columns:1fr}
+    .menu-grid{grid-template-columns:1fr}
+    .menu-item:nth-child(odd){border-right:none}
+    .footer-grid{grid-template-columns:1fr 1fr; gap:40px}
+    .story-media .image-float{bottom:-30px; right:-20px; width:50%}
+    .gallery-grid{grid-template-columns:repeat(6,1fr); grid-auto-rows:100px}
+    .gallery-item.g1{grid-column:span 6; grid-row:span 2}
+    .gallery-item.g2{grid-column:span 3; grid-row:span 2}
+    .gallery-item.g3{grid-column:span 3; grid-row:span 2}
+    .gallery-item.g4{grid-column:span 3; grid-row:span 2}
+    .gallery-item.g5{grid-column:span 3; grid-row:span 2}
+    .gallery-item.g6{grid-column:span 6; grid-row:span 2}
+    .gallery-item.g7{grid-column:span 3; grid-row:span 2}
+    .gallery-item.g8{grid-column:span 3; grid-row:span 2}
+    .hero-meta{grid-template-columns:1fr 1fr}
+    section{padding:80px 0}
+    .hiking{padding:100px 0}
+  }
+  @media (max-width: 600px){
+    .container{padding:0 20px}
+    .features-grid{grid-template-columns:1fr}
+    .hero-meta{grid-template-columns:1fr}
+    .stats-row{grid-template-columns:1fr 1fr}
+    .footer-grid{grid-template-columns:1fr}
+    .menu-item{grid-template-columns:90px 1fr; gap:16px; padding:20px}
+    .menu-item-price{grid-column:2; margin-top:4px}
+    .menu-item-img{width:90px; height:90px}
+    .hiking-facts{grid-template-columns:1fr}
+    .fact:nth-child(odd){padding-right:0; border-right:none}
+    .fact:nth-child(even){padding-left:0}
+    .reviews-head{flex-direction:column; align-items:flex-start}
+    nav.site .nav-cta .btn{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- Lucide icons inline as SVG symbols -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 7-8 12-8 12s-8-5-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol>
+    <symbol id="i-facebook" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+    <symbol id="i-mountain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3l4 8 5-5 5 15H2L8 3z"/></symbol>
+    <symbol id="i-utensils" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></symbol>
+    <symbol id="i-beer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M17 11h1a3 3 0 0 1 0 6h-1"/><path d="M9 12v6"/><path d="M13 12v6"/><path d="M14 7.5c-1 0-1.44.5-3 .5s-2-.5-3-.5-1.72.5-2.5.5a2.5 2.5 0 0 1 0-5c.78 0 1.57.5 2.5.5S9.44 2 11 2s2 1.5 3 1.5 1.72-.5 2.5-.5a2.5 2.5 0 0 1 0 5c-.78 0-1.5-.5-2.5-.5Z"/><path d="M5 8v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8"/></symbol>
+    <symbol id="i-coffee" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></symbol>
+    <symbol id="i-fish" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 12c.94-3.46 4.94-6 8.5-6 3.56 0 6.06 2.54 7 6-.94 3.47-3.44 6-7 6s-7.56-2.53-8.5-6Z"/><path d="M18 12v.5"/><path d="M16 17.93a9.77 9.77 0 0 1 0-11.86"/><path d="M7 10.67C7 8 5.58 5.97 2.73 5.5c-1 1.5-1 5 .23 6.5-1.24 1.5-1.24 5-.23 6.5C5.58 18.03 7 16 7 13.33"/><path d="M10.46 7.26C10.2 5.88 9.17 4.24 8 3h5.8a2 2 0 0 1 1.98 1.67l.23 1.4"/><path d="m16.01 17.93-.23 1.4A2 2 0 0 1 13.8 21H9.5a5.96 5.96 0 0 0 1.49-3.98"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19.2 2.96c1.4 2.4 1.4 6.04 0 8.44-2.2 1.52-3.7 2.04-9.4 3.14a7 7 0 0 1 1.2 5.46Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></symbol>
+    <symbol id="i-compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></symbol>
+    <symbol id="i-wifi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></symbol>
+    <symbol id="i-parking" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></symbol>
+    <symbol id="i-snowflake" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/><path d="m20 16-4-4 4-4"/><path d="m4 8 4 4-4 4"/><path d="m16 4-4 4-4-4"/><path d="m8 20 4-4 4 4"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+    <symbol id="i-arrow-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></symbol>
+    <symbol id="i-anchor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><line x1="12" y1="22" x2="12" y2="8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/></symbol>
+  </defs>
+</svg>
+
+<!-- NAVIGATION -->
+<nav class="site" id="nav">
+  <div class="container wrap">
+    <a href="#top" class="logo" aria-label="Segla Grill og Pub — til forsiden">
+      <span class="logo-img">
+        <!-- Logoen i to versjoner: lys vises over hero, mørk vises når du scroller -->
+        <img class="logo-light" src="segla-logo-light.png" alt="Segla Grill og Pub logo" />
+        <img class="logo-dark" src="segla-logo-dark.png" alt="" aria-hidden="true" />
+      </span>
+      <span class="logo-text">
+        Segla
+        <span class="small">Grill &amp; Pub · Fjordgård</span>
+      </span>
+    </a>
+    <ul>
+      <li><a href="#story">Historien</a></li>
+      <li><a href="#menu">Meny</a></li>
+      <li><a href="#hiking">Segla-fjellet</a></li>
+      <li><a href="#gallery">Galleri</a></li>
+      <li><a href="#visit">Besøk oss</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="tel:+4792819619" class="phone-link">
+        <svg class="icon"><use href="#i-phone"/></svg>
+        928 19 619
+      </a>
+      <a href="#visit" class="btn btn-primary">Reserver bord</a>
+      <button class="mobile-toggle" aria-label="Meny">
+        <svg class="icon icon-lg"><use href="#i-menu"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero-bg-fallback"></div>
+  <div class="hero-bg"></div>
+
+  <div class="container hero-content">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow hero-eyebrow">Fjordgård · Senja · 69°N</div>
+        <h1 class="hero-title">Et måltid under <em>Seglas</em> seil.</h1>
+      </div>
+      <div>
+        <p class="hero-sub">
+          Hjertelig gjestfrihet, lokalt fanget torsk, og utsikt rett mot et av Norges mest ikoniske fjell. Vi har holdt til ved Ørnfjorden i Fjordgård siden fiskerne kom hjem med dagsfangsten — og gjør det fortsatt.
+        </p>
+        <div class="hero-actions">
+          <a href="#menu" class="btn btn-light">
+            Utforsk menyen
+            <svg class="icon"><use href="#i-arrow-right"/></svg>
+          </a>
+          <a href="#visit" class="btn btn-outline-light">Åpningstider</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Beliggenhet</span>
+        <span class="hero-meta-value">Ved foten av Segla</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Spesialitet</span>
+        <span class="hero-meta-value italic">Fish &amp; Chips — torsk fra Senja</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Gjestevurdering</span>
+        <span class="hero-meta-value">4,5 / 5 ★★★★★</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-marquee">
+    <div class="marquee-track">
+      <span>Ferskt fra fjorden</span>
+      <span>Hjemmelaget hver dag</span>
+      <span>Utsikt til Segla 639m</span>
+      <span>Familiedrevet siden åpning</span>
+      <span>Lokal tap på kranen</span>
+      <span>Solterrasse med fjordsikt</span>
+      <span>Ferskt fra fjorden</span>
+      <span>Hjemmelaget hver dag</span>
+      <span>Utsikt til Segla 639m</span>
+      <span>Familiedrevet siden åpning</span>
+      <span>Lokal tap på kranen</span>
+      <span>Solterrasse med fjordsikt</span>
+    </div>
+  </div>
+</header>
+
+<!-- STORY -->
+<section class="story" id="story">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-media">
+        <span class="badge">
+          <svg class="icon" style="width:14px;height:14px"><use href="#i-anchor"/></svg>
+          Arnakkveien 1 · 9388
+        </span>
+        <div class="image-main">
+          <img src="https://images.unsplash.com/photo-1551887196-72e32bfc7bf3?auto=format&fit=crop&w=900&q=80" alt="Innbydende interiør med varme trematerialer og levende lys" />
+        </div>
+        <div class="image-float">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=700&q=80" alt="Lokalt servert rett på tallerken" />
+        </div>
+      </div>
+
+      <div class="story-text">
+        <div class="eyebrow" style="margin-bottom:20px">Historien vår</div>
+        <h2>Der fjellet møter <em class="italic">fjorden,</em> og folk møter folk.</h2>
+        <p class="lede">
+          Segla Grill og Pub er mer enn et spisested — det er møtestedet i Fjordgård. Hit kommer turgåere med solbrente kinn, lokale fiskere, bilder­jegere på jakt etter det perfekte lyset, og naboer som bare ville ha en kaffe og en prat.
+        </p>
+        <p>
+          Vi ligger ved enden av veien i et av Senjas mest dramatiske landskap — der Ørnfjorden skjærer seg inn mellom de bratte fjellveggene, og Segla stiger rett opp fra sjøen som et seil av stein. Det er en setting du ikke glemmer, og en gjestfrihet vi er stolte av.
+        </p>
+        <p>
+          Menyen vår er enkel og ærlig: lokal torsk i sprø røre, saftige Segla-burgere, varm pizza, hjemmebakte blåbærkaker og godt øl på kranen. Alt servert med et smil og en fortelling — ofte om fjellet utenfor vinduet.
+        </p>
+
+        <div class="stats-row">
+          <div class="stat">
+            <div class="num">4,5★</div>
+            <div class="label">Rating på Google</div>
+          </div>
+          <div class="stat">
+            <div class="num">370+</div>
+            <div class="label">Gjesteanmeldelser</div>
+          </div>
+          <div class="stat">
+            <div class="num">#2</div>
+            <div class="label">Av Fjordgårds restauranter</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Hva vi tilbyr</div>
+        <h2 class="section-title">Mer enn bare <em>et måltid.</em></h2>
+      </div>
+      <p class="section-lede">
+        Enten du kommer ned fra fjellet, er på rundtur langs nasjonal turistvei Senja, eller har booket deg inn på Segla Bed &amp; Go — vi har alt du trenger for en ekte nordnorsk opplevelse.
+      </p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature">
+        <svg class="icon icon-xl"><use href="#i-utensils"/></svg>
+        <h3>Ærlig mat</h3>
+        <p>Fish &amp; chips på lokal torsk, saftige burgere, sprø pizza og hjemmebakte kaker. Laget med kjærlighet, servert varm.</p>
+      </div>
+      <div class="feature">
+        <svg class="icon icon-xl"><use href="#i-beer"/></svg>
+        <h3>Lokal pub</h3>
+        <p>Øl på kranen, et godt utvalg viner og sprit, og en koselig pubatmosfære hvor gjester og lokale møtes.</p>
+      </div>
+      <div class="feature">
+        <svg class="icon icon-xl"><use href="#i-sun"/></svg>
+        <h3>Solterrasse</h3>
+        <p>Nyt maten utendørs med direkte utsikt over Ørnfjorden. Den beste plassen i Fjordgård når sola står på.</p>
+      </div>
+      <div class="feature">
+        <svg class="icon icon-xl"><use href="#i-compass"/></svg>
+        <h3>Turutleie</h3>
+        <p>Vi leier ut truger, staver og annet utstyr du trenger for Segla-, Hesten- og Barden-turene. Spør i baren.</p>
+      </div>
+      <div class="feature">
+        <svg class="icon icon-xl"><use href="#i-heart"/></svg>
+        <h3>Lokale suvenirer</h3>
+        <p>Håndlagede produkter fra området, bøker, postkort og gaver du ikke finner andre steder — ta med en bit av Senja hjem.</p>
+      </div>
+      <div class="feature">
+        <svg class="icon icon-xl"><use href="#i-parking"/></svg>
+        <h3>God parkering</h3>
+        <p>Gratis parkering rett ved restauranten, og stor betalt parkeringsplass ved Segla-turens utgangspunkt noen minutter unna.</p>
+      </div>
+      <div class="feature">
+        <svg class="icon icon-xl"><use href="#i-wifi"/></svg>
+        <h3>Wi-Fi for alle</h3>
+        <p>Raskt og gratis nett for gjester. Last opp fjellbilder, ring familien, eller planlegg dagens neste eventyr.</p>
+      </div>
+      <div class="feature">
+        <svg class="icon icon-xl"><use href="#i-anchor"/></svg>
+        <h3>Overnatting</h3>
+        <p>Søsterbedriften Segla Bed &amp; Go tilbyr komfortable studioleiligheter med fjordsikt — perfekt for aktive ferier.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu" id="menu">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Menyen</div>
+        <h2 class="section-title">Senjas smak, <em>enkelt servert.</em></h2>
+      </div>
+      <p class="section-lede">
+        Fisken kommer rett fra båtene i Ørnfjorden. Kjøttet er norsk. Ølet er lokalt. Og blåbærene i kaken plukket vi (som oftest) selv i skråningene rundt fjellet. Menyen endres med sesongen — spør i baren etter dagens forslag.
+      </p>
+    </div>
+
+    <div class="menu-tabs">
+      <button class="menu-tab active" data-tab="signature">Husets favoritter</button>
+      <button class="menu-tab" data-tab="burgers">Burgere</button>
+      <button class="menu-tab" data-tab="pizza">Pizza</button>
+      <button class="menu-tab" data-tab="small">Småretter</button>
+      <button class="menu-tab" data-tab="sweet">Søtt</button>
+      <button class="menu-tab" data-tab="drinks">Drikke</button>
+    </div>
+
+    <!-- SIGNATURES -->
+    <div class="menu-panel active" data-panel="signature">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-item-img"><img src="https://images.unsplash.com/photo-1579208030886-b937da0925dc?auto=format&fit=crop&w=400&q=80" alt="Fish and chips"></div>
+          <div class="menu-item-body">
+            <h4>Seglas Fish &amp; Chips</h4>
+            <p>Lokal torsk i sprø gyllen røre, pommes frites, hjemmelaget remulade og sitron. Husets signatur — og grunnen de fleste kommer tilbake.</p>
+            <span class="menu-item-tag local">Lokal torsk</span>
+          </div>
+          <div class="menu-item-price">249,-</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-img"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=400&q=80" alt="Segla Burger"></div>
+          <div class="menu-item-body">
+            <h4>Segla-burger</h4>
+            <p>200g norsk nøttekjøtt, sprø bacon, moden cheddar, karamellisert løk, syltet agurk, husdressing. Serveres i brioche med pommes frites.</p>
+            <span class="menu-item-tag">Signatur</span>
+          </div>
+          <div class="menu-item-price">265,-</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-img"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=400&q=80" alt="Ribeye steak"></div>
+          <div class="menu-item-body">
+            <h4>Entrecôte &amp; pepperbrus</h4>
+            <p>220g norsk entrecôte stekt på grill, bakt potet, smørdampede grønnsaker og klassisk pepperbrus. For en ekte sulten turgåer.</p>
+          </div>
+          <div class="menu-item-price">385,-</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-img"><img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=400&q=80" alt="Fiskekaker"></div>
+          <div class="menu-item-body">
+            <h4>Fiskekaker fra Senja</h4>
+            <p>Husets fiskekaker av lokal hvitfisk, servert med potetstappe, ertestuing og kokte gulrøtter. Oldemors oppskrift.</p>
+            <span class="menu-item-tag local">Tradisjonell</span>
+          </div>
+          <div class="menu-item-price">229,-</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BURGERS -->
+    <div class="menu-panel" data-panel="burgers">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-item-img"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=400&q=80" alt="Segla burger"></div>
+          <div class="menu-item-body">
+            <h4>Segla-burger</h4>
+            <p>200g norsk nøttekjøtt, bacon, cheddar, karamellisert løk, syltet agurk, husdressing, brioche.</p>
+          </div>
+          <div class="menu-item-price">265,-</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-img"><img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=400&q=80" alt="Cheeseburger"></div>
+          <div class="menu-item-body">
+            <h4>Klassisk cheeseburger</h4>
+            <p>Saftig burger med dobbel ost, salat, tomat, rødløk og husdressing. Enkel og vanedannende.</p>
+          </div>
+          <div class="menu-item-price">215,-</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-img"><img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=400&q=80" alt="Double burger"></div>
+          <div class="menu-item-body">
+            <h4>Fjellvandrer-burger</h4>
+            <p>To kjøttkaker, dobbel ost, bacon, egg, sprø løk. For deg som nettopp har gått opp — og ned — Segla.</p>
+            <span class="menu-item-tag">Stor</span>
+          </div>
+          <div class="menu-item-price">295,-</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-img"><img src="https://images.unsplash.com/photo-1520072959219-c595dc870360?auto=format&fit=crop&w=400&q=80" alt="Veggie burger"></div>
+          <div class="menu-item-body">
+            <h4>Vegetarburger</h4>
+            <p>Sprø grønnsaksbiff med rødbete, quinoa og urter, avokado, rucola, hummusdressing. Serveres med pommes frites.</p>
+            <svg class="icon" style="color:var(--moss); margin-top:6px"><use href="#i-leaf"/></svg>
+          </div>
+          <div class="menu-item-price">229,-</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-img"><img src="https://images.unsplash.com/photo-1606755962773-d324e2dabd8f?auto=format&fit=crop&w=400&q=80" alt="Chicken burger"></div>
+          <div class="menu-item-body">
+            <h4>Sprø kyllingburger</h4>
+            <p>Panert kyllingfilet, honningsennep, syltet rødløk, isbergsalat, mango-chili dressing.</p>
+          </div>
+          <div class="menu-item-price">239,-</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-img"><img src="https://images.unsplash.com/photo-1606131731446-5568d87113aa?auto=format&fit=crop&w=400&q=80" alt="Kids burger"></div>
+          <div class="menu-item-body">
+            <h4>Seglabarn-burger</h4>
+            <p>Barneversjon av husets burger med ost og ketchup, pommes frites og en liten saft. Til de minste turfolkene.</p>
+            <span class="menu-item-tag new">Barn</span>
+          </div>
+          <div class="menu-item-price">139,-</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PIZZA -->
+    <div class="menu-panel" data-panel="pizza">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-item-img"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=400&q=80" alt="Margherita"></div>
+          <div class="menu-item-body">
+            <h4>Margherita</h4>
+            <p>San Marzano-tomat, fior di latte, fersk basilikum, god olivenolje. Enkel perfeksjon.</p>
+          </div>
+          <div class="menu-item-price">199,-</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-img"><img src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?auto=format&fit=crop&w=400&q=80" alt="Pepperoni"></div>
+          <div class="menu-item-body">
+            <h4>Pepperoni</h4>
+            <p>Italiensk pepperoni, mozzarella, tomatsaus, chili, oregano. En klassiker, gjort skikkelig.</p>
+          </div>
+          <div class="menu-item-price">229,-</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-img"><img src="https://images.unsplash.com/photo-1590947132387-155cc02f3212?auto=format&fit=crop&w=400&q=80" alt="Parma pizza"></div>
+          <div class="menu-item-body">
+            <h4>Senja-spesial</h4>
+            <p>Røkt laks fra lokale Senja Fisk, rødløk, kapers, crème fraîche, dill, sitronzest. Nord møter sør.</p>
+            <span class="menu-item-tag local">Lokal laks</span>
+          </div>
+          <div class="menu-item-price">265,-</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-img"><img src="https://images.unsplash.com/photo-1604917877934-07d8d248d396?auto=format&fit=crop&w=400&q=80" alt="Funghi pizza"></div>
+          <div class="menu-item-body">
+            <h4>Funghi &amp; trøffel</h4>
+            <p>Tre typer sopp, mozzarella, ricotta, trøffelolje, ruccola. Jordnær og aromatisk.</p>
+          </div>
+          <div class="menu-item-price">249,-</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SMALL PLATES -->
+    <div class="menu-panel" data-panel="small">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-item-img"><img src="https://images.unsplash.com/photo-1576107232684-1279f390859f?auto=format&fit=crop&w=400&q=80" alt="Fiskesuppe"></div>
+          <div class="menu-item-body">
+            <h4>Nordnorsk fiskesuppe</h4>
+            <p>Fløtebasert suppe med torsk, laks, reker, purre og rotgrønnsaker. Servert med rustikt brød og smør.</p>
+            <span class="menu-item-tag local">Husets</span>
+          </div>
+          <div class="menu-item-price">189,-</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-img"><img src="https://images.unsplash.com/photo-1619096252214-ef06c45683e3?auto=format&fit=crop&w=400&q=80" alt="Pommes frites"></div>
+          <div class="menu-item-body">
+            <h4>Pommes frites med aïoli</h4>
+            <p>Sprø, tynne pommes frites med flaksalt, servert med hvitløksaïoli.</p>
+          </div>
+          <div class="menu-item-price">79,-</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-img"><img src="https://images.unsplash.com/photo-1608039829572-78524f79c4c7?auto=format&fit=crop&w=400&q=80" alt="Onion rings"></div>
+          <div class="menu-item-body">
+            <h4>Sprø løkringer</h4>
+            <p>Panerte løkringer med røkt paprika og BBQ-majones.</p>
+          </div>
+          <div class="menu-item-price">89,-</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-img"><img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?auto=format&fit=crop&w=400&q=80" alt="Caesar salad"></div>
+          <div class="menu-item-body">
+            <h4>Ceasarsalat med kylling</h4>
+            <p>Sprø romanosalat, krydret grillkylling, parmesan, krutonger, klassisk ceasardressing.</p>
+          </div>
+          <div class="menu-item-price">199,-</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DESSERTS -->
+    <div class="menu-panel" data-panel="sweet">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-item-img"><img src="https://images.unsplash.com/photo-1464195244916-405fa0a82545?auto=format&fit=crop&w=400&q=80" alt="Blueberry cake"></div>
+          <div class="menu-item-body">
+            <h4>Blåbærkake fra fjellet</h4>
+            <p>Hjemmebakt kake med egenplukkede blåbær fra skråningene rundt Segla. Serveres med pisket krem.</p>
+            <span class="menu-item-tag local">Egenplukket</span>
+          </div>
+          <div class="menu-item-price">95,-</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-img"><img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=400&q=80" alt="Chocolate muffin"></div>
+          <div class="menu-item-body">
+            <h4>Sjokolademuffins</h4>
+            <p>Fyldig, varm sjokolademuffin med flytende kjerne. Perfekt til kaffen.</p>
+          </div>
+          <div class="menu-item-price">69,-</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-img"><img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=400&q=80" alt="Waffles"></div>
+          <div class="menu-item-body">
+            <h4>Hjemmelagde vafler</h4>
+            <p>Tradisjonelle hjertevafler med rømme, sukker og syltetøy fra stedet. Klassikeren.</p>
+          </div>
+          <div class="menu-item-price">79,-</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-img"><img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=400&q=80" alt="Ice cream"></div>
+          <div class="menu-item-body">
+            <h4>Isbølle med varme bær</h4>
+            <p>Vaniljeis toppet med varm multesaus og mandelflak. En nordnorsk favoritt.</p>
+          </div>
+          <div class="menu-item-price">89,-</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DRINKS -->
+    <div class="menu-panel" data-panel="drinks">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-item-img"><img src="https://images.unsplash.com/photo-1608270586620-248524c67de9?auto=format&fit=crop&w=400&q=80" alt="Draft beer"></div>
+          <div class="menu-item-body">
+            <h4>Lokalt fatøl 0,4L</h4>
+            <p>Pils og IPA fra nordnorske bryggerier på kranen. Spør etter dagens utvalg.</p>
+            <span class="menu-item-tag local">På kranen</span>
+          </div>
+          <div class="menu-item-price">119,-</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-img"><img src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?auto=format&fit=crop&w=400&q=80" alt="Red wine"></div>
+          <div class="menu-item-body">
+            <h4>Husets vin, glass</h4>
+            <p>Rød, hvit eller rosé. Utvalgt for å gå godt med maten. Flasker fra 425,-</p>
+          </div>
+          <div class="menu-item-price">129,-</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-img"><img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=400&q=80" alt="Coffee"></div>
+          <div class="menu-item-body">
+            <h4>Ekte espresso</h4>
+            <p>Espresso, americano, cappuccino eller latte. Ristet i Norge.</p>
+          </div>
+          <div class="menu-item-price">49,-</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-img"><img src="https://images.unsplash.com/photo-1523677011781-c91d1bbe2f9e?auto=format&fit=crop&w=400&q=80" alt="Hot chocolate"></div>
+          <div class="menu-item-body">
+            <h4>Varm sjokolade med krem</h4>
+            <p>Fyldig varm sjokolade med pisket krem og marshmallows. Perfekt etter vinterturer.</p>
+          </div>
+          <div class="menu-item-price">69,-</div>
+        </div>
+      </div>
+    </div>
+
+    <p style="text-align:center; margin-top:48px; color:rgba(10,15,23,.55); font-size:14px">
+      Menyen er et utvalg fra vårt faste tilbud. Priser kan endres. Allergi? Gi oss beskjed — vi hjelper gjerne.
+    </p>
+  </div>
+</section>
+
+<!-- HIKING -->
+<section class="hiking" id="hiking">
+  <div class="hiking-bg"></div>
+  <div class="container hiking-content">
+    <div class="hiking-grid">
+      <div>
+        <div class="eyebrow" style="color:var(--gold)">Fjellet utenfor døra</div>
+        <h2>639 meter over <em>havet.</em></h2>
+        <p>
+          Segla-fjellet er et av Nordens mest fotograferte fjell — et dramatisk seil av stein som stuper 600 meter rett ned i Mefjorden. Turstien starter bak skolen, kun få minutters gange fra oss.
+        </p>
+        <p>
+          Etter en lang tur tilbake ned er det få ting som kjennes bedre enn en varm tallerken fish &amp; chips, et kaldt lokalt øl og utsikten over fjorden fra solterrassen vår. Vi har tatt imot fjellvandrere fra hele verden — og sier alltid det samme: sikre været, pakk riktig, og ha god tid.
+        </p>
+        <div style="display:flex; gap:12px; margin:32px 0; flex-wrap:wrap">
+          <a href="#menu" class="btn btn-primary" style="background:var(--ember)">
+            <svg class="icon"><use href="#i-utensils"/></svg>
+            Mat etter turen
+          </a>
+          <a href="#visit" class="btn btn-outline-light">
+            <svg class="icon"><use href="#i-compass"/></svg>
+            Leie truger &amp; staver
+          </a>
+        </div>
+      </div>
+
+      <div class="hiking-facts">
+        <div class="fact">
+          <div class="fact-label">Høyde</div>
+          <div class="fact-value"><em>639</em> m</div>
+          <div class="fact-note">over havet</div>
+        </div>
+        <div class="fact">
+          <div class="fact-label">Distanse</div>
+          <div class="fact-value">5 km</div>
+          <div class="fact-note">tur-retur</div>
+        </div>
+        <div class="fact">
+          <div class="fact-label">Stigning</div>
+          <div class="fact-value">610 m</div>
+          <div class="fact-note">bratt i toppen</div>
+        </div>
+        <div class="fact">
+          <div class="fact-label">Tidsbruk</div>
+          <div class="fact-value">3–4 <em>t</em></div>
+          <div class="fact-note">moderat til krevende</div>
+        </div>
+        <div class="fact">
+          <div class="fact-label">Sesong</div>
+          <div class="fact-value">Jun–Sep</div>
+          <div class="fact-note">snøfritt og trygt</div>
+        </div>
+        <div class="fact">
+          <div class="fact-label">Fra oss</div>
+          <div class="fact-value">600 m</div>
+          <div class="fact-note">til parkeringen</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Øyeblikk</div>
+        <h2 class="section-title">Fra <em>kjøkkenet,</em> fjellet &amp; fjorden.</h2>
+      </div>
+      <p class="section-lede">
+        Et lite utvalg fra hverdagen vår — mat, folk, utsikt og lyset som forandrer seg hvert minutt over Ørnfjorden.
+      </p>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item g1"><img src="https://images.unsplash.com/photo-1601439678777-b2b3c56fa627?auto=format&fit=crop&w=1200&q=80" alt="Utsikt mot Segla"></div>
+      <div class="gallery-item g2"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80" alt="Segla burger"></div>
+      <div class="gallery-item g3"><img src="https://images.unsplash.com/photo-1572448862527-d3165f35ac5e?auto=format&fit=crop&w=600&q=80" alt="Nordnorsk fjord"></div>
+      <div class="gallery-item g4"><img src="https://images.unsplash.com/photo-1579208030886-b937da0925dc?auto=format&fit=crop&w=800&q=80" alt="Fish and chips"></div>
+      <div class="gallery-item g5"><img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80" alt="Koselig interiør"></div>
+      <div class="gallery-item g6"><img src="https://images.unsplash.com/photo-1520175434464-74f1e0eaacad?auto=format&fit=crop&w=1200&q=80" alt="Nordlys"></div>
+      <div class="gallery-item g7"><img src="https://images.unsplash.com/photo-1555992336-fb0d29498b13?auto=format&fit=crop&w=900&q=80" alt="Lokal øl"></div>
+      <div class="gallery-item g8"><img src="https://images.unsplash.com/photo-1464195244916-405fa0a82545?auto=format&fit=crop&w=700&q=80" alt="Blåbærkake"></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews">
+  <div class="container">
+    <div class="reviews-head">
+      <div>
+        <div class="eyebrow" style="color:var(--ember-soft)">Hva gjestene sier</div>
+        <h2 class="section-title" style="margin-top:16px">Stemmer fra <em>bordet.</em></h2>
+      </div>
+      <div class="reviews-score">
+        <div class="big">4,5</div>
+        <div class="meta">
+          <div class="stars">
+            <svg class="icon"><use href="#i-star"/></svg>
+            <svg class="icon"><use href="#i-star"/></svg>
+            <svg class="icon"><use href="#i-star"/></svg>
+            <svg class="icon"><use href="#i-star"/></svg>
+            <svg class="icon"><use href="#i-star"/></svg>
+          </div>
+          Basert på 370+ anmeldelser<br>
+          <span style="opacity:.6">Google · Tripadvisor · Restaurant Guru</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="quote-mark">&#8220;</div>
+        <p class="review-text">Nydelig fish &amp; chips, vidunderlige verter og en svært hyggelig atmosfære. Toppet med en fantastisk utsikt over fjorden.</p>
+        <div class="review-author">
+          <div class="review-avatar">M</div>
+          <div>
+            <div class="review-name">Marta L.</div>
+            <div class="review-meta">
+              <div class="stars" style="margin:0">
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+              </div>
+              Google · juli 2025
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="quote-mark">&#8220;</div>
+        <p class="review-text">Etter å ha besteget Segla stoppet vi her og nøt først en drink på solterrassen, og bestilte så fish &amp; chips. Den lokale fisken var ypperlig tilberedt — store biter, tykk sprø skorpe og en fin remulade.</p>
+        <div class="review-author">
+          <div class="review-avatar">H</div>
+          <div>
+            <div class="review-name">Henrik B.</div>
+            <div class="review-meta">
+              <div class="stars" style="margin:0">
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+              </div>
+              Tripadvisor · august 2024
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="quote-mark">&#8220;</div>
+        <p class="review-text">Hyggelig sted med god mat. Seglas-burger var nydelig, pommesene sprø utenpå og møre inni. Vi leide også truger og staver her — perfekt sted før og etter klatring til fjellene.</p>
+        <div class="review-author">
+          <div class="review-avatar">A</div>
+          <div>
+            <div class="review-name">Anna K.</div>
+            <div class="review-meta">
+              <div class="stars" style="margin:0">
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+              </div>
+              Tripadvisor · mars 2025
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="quote-mark">&#8220;</div>
+        <p class="review-text">Familieforetak. Utmerket mat. Et utmerket lite sted. Hjemmelagde gaver. Travelt, men aldri et problem for dem!</p>
+        <div class="review-author">
+          <div class="review-avatar">J</div>
+          <div>
+            <div class="review-name">James P.</div>
+            <div class="review-meta">
+              <div class="stars" style="margin:0">
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+              </div>
+              Tripadvisor · juni 2024
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="quote-mark">&#8220;</div>
+        <p class="review-text">Perfekt sted for å nyte et mettende fish &amp; chips-måltid. Eller hvilken som helst annen god rett. Gjør alle glade etter en lang skidag!</p>
+        <div class="review-author">
+          <div class="review-avatar">T</div>
+          <div>
+            <div class="review-name">Tomas S.</div>
+            <div class="review-meta">
+              <div class="stars" style="margin:0">
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+              </div>
+              Tripadvisor · april 2024
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="quote-mark">&#8220;</div>
+        <p class="review-text">Veldig koselig liten grill og pub med utsikt til fjorden. Vi var virkelig fornøyde med vår deilige fish &amp; chips. Vennlig sted og god service.</p>
+        <div class="review-author">
+          <div class="review-avatar">S</div>
+          <div>
+            <div class="review-name">Sofie V.</div>
+            <div class="review-meta">
+              <div class="stars" style="margin:0">
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+                <svg class="icon" style="width:12px;height:12px"><use href="#i-star"/></svg>
+              </div>
+              Yelp · september 2024
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT US -->
+<section class="visit" id="visit">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Besøk oss</div>
+        <h2 class="section-title">Kom <em>innom.</em> Vi holder varmt.</h2>
+      </div>
+      <p class="section-lede">
+        Du finner oss ved Arnakkveien 1 i Fjordgård, midt mellom fjorden og Segla-fjellet. Ring gjerne i forkant ved store grupper eller i høysesongen.
+      </p>
+    </div>
+
+    <div class="visit-grid">
+      <div class="hours-card">
+        <h3>Åpningstider</h3>
+        <ul class="hours-list">
+          <li><span class="day">Mandag</span><span class="time">15:00 – 21:00</span></li>
+          <li><span class="day">Tirsdag</span><span class="time">15:00 – 21:00</span></li>
+          <li><span class="day">Onsdag</span><span class="time">15:00 – 21:00</span></li>
+          <li><span class="day">Torsdag</span><span class="time">15:00 – 21:00</span></li>
+          <li><span class="day">Fredag</span><span class="time">13:00 – 23:00</span></li>
+          <li><span class="day">Lørdag</span><span class="time">13:00 – 23:00</span></li>
+          <li><span class="day">Søndag</span><span class="time">13:00 – 21:00</span></li>
+        </ul>
+        <div class="hours-note">
+          <svg class="icon"><use href="#i-info"/></svg>
+          <div>
+            <strong>Sesongåpent.</strong> Åpningstidene kan variere i lavsesong (november–mars). Vi anbefaler å ringe <a href="tel:+4792819619" style="color:var(--ember); font-weight:600">928 19 619</a> før du kommer utenom sommersesongen.
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-blocks">
+        <a href="tel:+4792819619" class="contact-block">
+          <div class="contact-icon"><svg class="icon"><use href="#i-phone"/></svg></div>
+          <div>
+            <h4>Ring oss</h4>
+            <div class="val">+47 928 19 619</div>
+            <div class="sub">Bordreservasjon, catering, spørsmål</div>
+          </div>
+        </a>
+        <a href="https://maps.google.com/?q=Arnakkveien+1,+9388+Fjordgård" target="_blank" rel="noopener" class="contact-block">
+          <div class="contact-icon"><svg class="icon"><use href="#i-pin"/></svg></div>
+          <div>
+            <h4>Finn oss</h4>
+            <div class="val">Arnakkveien 1, 9388 Fjordgård</div>
+            <div class="sub">Senja, Troms · ca. 2,5 t fra Tromsø</div>
+          </div>
+        </a>
+        <a href="mailto:post@seglagrill.no" class="contact-block">
+          <div class="contact-icon"><svg class="icon"><use href="#i-mail"/></svg></div>
+          <div>
+            <h4>Send en e-post</h4>
+            <div class="val">post@seglagrill.no</div>
+            <div class="sub">Grupper, overnatting, samarbeid</div>
+          </div>
+        </a>
+        <a href="https://www.facebook.com/seglagrill/" target="_blank" rel="noopener" class="contact-block">
+          <div class="contact-icon"><svg class="icon"><use href="#i-facebook"/></svg></div>
+          <div>
+            <h4>Følg oss</h4>
+            <div class="val">@seglagrill</div>
+            <div class="sub">Facebook &amp; Instagram — dagens meny og bilder</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <div class="container">
+    <div class="cta-inner">
+      <h2>Planlegger du tur til Senja? <em>La oss holde av et bord.</em></h2>
+      <a href="tel:+4792819619" class="btn btn-light">
+        <svg class="icon"><use href="#i-phone"/></svg>
+        Ring 928 19 619
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo" style="margin-bottom:20px">
+          <span class="logo-img" style="width:64px; height:64px">
+            <img src="segla-logo-light.png" alt="Segla Grill og Pub" style="opacity:1" />
+          </span>
+          <span class="logo-text" style="color:var(--paper)">
+            Segla
+            <span class="small" style="opacity:.6">Grill &amp; Pub · Fjordgård</span>
+          </span>
+        </div>
+        <p>Et familiedrevet grillhus og pub i Fjordgård på Senja — med lokal torsk, varme smil og utsikt til et av Norges mest ikoniske fjell. Velkommen hjem til oss.</p>
+        <div class="socials">
+          <a href="https://www.facebook.com/seglagrill/" target="_blank" rel="noopener" aria-label="Facebook"><svg class="icon"><use href="#i-facebook"/></svg></a>
+          <a href="https://www.instagram.com/seglagrillogpub/" target="_blank" rel="noopener" aria-label="Instagram"><svg class="icon"><use href="#i-instagram"/></svg></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Meny</h4>
+        <ul>
+          <li><a href="#story">Historien vår</a></li>
+          <li><a href="#menu">Matmeny</a></li>
+          <li><a href="#hiking">Om Segla-fjellet</a></li>
+          <li><a href="#gallery">Galleri</a></li>
+          <li><a href="#visit">Kontakt</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Besøk</h4>
+        <div class="item">
+          <svg class="icon"><use href="#i-pin"/></svg>
+          <span>Arnakkveien 1<br>9388 Fjordgård, Senja</span>
+        </div>
+        <div class="item">
+          <svg class="icon"><use href="#i-phone"/></svg>
+          <span>+47 928 19 619</span>
+        </div>
+        <div class="item">
+          <svg class="icon"><use href="#i-mail"/></svg>
+          <span>post@seglagrill.no</span>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Åpningstider</h4>
+        <div class="item">
+          <svg class="icon"><use href="#i-clock"/></svg>
+          <span>Man–tor: 15 – 21<br>Fre–lør: 13 – 23<br>Søndag: 13 – 21</span>
+        </div>
+        <div class="item" style="margin-top:16px">
+          <svg class="icon"><use href="#i-snowflake"/></svg>
+          <span style="font-size:13px; opacity:.7">Reduserte tider i lavsesong — ring før du kommer</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© <span id="year">2026</span> Segla Grill og Pub · Org.nr. 910 158 449</div>
+      <div style="display:flex; gap:24px">
+        <a href="#top">Til toppen ↑</a>
+        <span style="opacity:.5">Designet for Senja, med kjærlighet</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Sticky nav
+  const nav = document.getElementById('nav');
+  const onScroll = () => {
+    if (window.scrollY > 40) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  // Menu tabs
+  document.querySelectorAll('.menu-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.getAttribute('data-tab');
+      document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelector(`.menu-panel[data-panel="${target}"]`).classList.add('active');
+    });
+  });
+
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Reveal on scroll (simple)
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'none';
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.08});
+  document.querySelectorAll('.feature, .menu-item, .review-card, .gallery-item, .fact, .contact-block').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = 'opacity .7s ease, transform .7s ease';
+    io.observe(el);
+  });
+
+  // Image error fallback — replace broken images with a subtle gradient placeholder
+  document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('error', () => {
+      img.style.display = 'none';
+    });
+  });
+</script>
+
+</body>
+</html>
